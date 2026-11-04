@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>そこが変だよ！インターナショナルスクール</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: a bright pastel canvas, a tilted sticker-style hero, asymmetric cards, one staggered entrance. */
+:root {
+  --cream: #fff6ee;
+  --peach: #ffd9c4;
+  --mint: #cdf0e1;
+  --lilac: #dcd4ff;
+  --butter: #fff0a6;
+  --sky: #cfe8ff;
+  --ink: #2f2b4f;
+  --ink-soft: #5b5778;
+  --display: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+  --body: "Noto Sans JP", "Hiragino Sans", sans-serif;
+  --mono: "Space Mono", ui-monospace, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--cream); }
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-block: 28px 64px;
+  padding-left: max(18px, env(safe-area-inset-left, 0px));
+  padding-right: max(18px, env(safe-area-inset-right, 0px));
+  position: relative;
+}
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(2px);
+}
+.blob.a { width: 340px; height: 340px; background: var(--lilac); top: -120px; right: -120px; opacity: .7; }
+.blob.b { width: 260px; height: 260px; background: var(--mint); bottom: 10%; left: -110px; opacity: .7; }
+.blob.c { width: 180px; height: 180px; background: var(--butter); top: 46%; right: -60px; opacity: .8; }
+.wrap > * { position: relative; z-index: 1; }
+
+/* Hero */
+.hero {
+  padding: 48px 0 30px;
+  text-align: left;
+}
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin: 0 0 22px;
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(38px, 9vw, 64px);
+  line-height: 1.15;
+  margin: 0 0 22px;
+  text-wrap: balance;
+  letter-spacing: -.01em;
+}
+h1 .sticker {
+  display: inline-block;
+  background: var(--peach);
+  padding: 0 .18em;
+  border-radius: 14px;
+  transform: rotate(-2deg);
+}
+h1 .q {
+  display: inline-block;
+  color: var(--ink);
+  transform: rotate(8deg);
+  margin-left: .04em;
+}
+.lede {
+  font-size: 17px;
+  max-width: 34em;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* Cards */
+.card {
+  border-radius: 28px;
+  padding: 28px 26px;
+  margin-top: 18px;
+}
+.card h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+.card p { margin: 0 0 12px; }
+.card p:last-child { margin-bottom: 0; }
+.k {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 6px;
+}
+.c-mint { background: var(--mint); }
+.c-lilac { background: var(--lilac); }
+.c-butter { background: var(--butter); }
+.c-peach { background: var(--peach); }
+.c-sky { background: var(--sky); }
+.c-white { background: #fff; box-shadow: 0 10px 30px rgba(47,43,79,.08); }
+
+/* Examples: three sticky notes, each slightly turned */
+.notes {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 0;
+  list-style: none;
+}
+.notes li {
+  border-radius: 22px;
+  padding: 20px 22px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(47,43,79,.08);
+}
+.notes li:nth-child(1) { transform: rotate(-1deg); background: var(--peach); }
+.notes li:nth-child(2) { transform: rotate(.8deg); background: var(--butter); }
+.notes li:nth-child(3) { transform: rotate(-.6deg); background: var(--mint); }
+.notes strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.notes span { font-size: 14px; color: var(--ink-soft); }
+
+/* Schedule as pills */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pills li {
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 15px;
+}
+.pills b { font-family: var(--mono); font-weight: 700; margin-right: 6px; }
+.placeholder { background: var(--butter); padding: 0 .3em; border-radius: 6px; }
+
+/* Speaker */
+.speaker-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.speaker-name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 0;
+  min-width: 0;
+}
+.role-pill {
+  font-size: 13px;
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 14px;
+  line-height: 1.5;
+  min-width: 0;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 16px;
+  padding: 0;
+  list-style: none;
+}
+.badges li {
+  background: var(--cream);
+  border-radius: 14px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.speaker-links {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.speaker-links a {
+  display: block;
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.speaker-links a:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(47,43,79,.12); }
+.speaker-links a::after { content: " →"; font-family: var(--mono); }
+
+.speaker-photo {
+  display: block;
+  width: 132px;
+  height: 132px;
+  max-width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  margin: 0 0 16px;
+}
+/* Facts */
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 10px 18px;
+  margin: 0;
+  font-size: 15px;
+}
+.facts dt {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding-top: 2px;
+}
+.facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+
+/* Questions: each one is a bubble, not a numbered step */
+.bubbles {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.bubbles li {
+  background: #fff;
+  border-radius: 999px 999px 999px 8px;
+  padding: 14px 22px;
+  font-size: 15px;
+  max-width: 92%;
+}
+.bubbles li:nth-child(even) { justify-self: end; border-radius: 999px 999px 8px 999px; background: var(--lilac); }
+
+/* Form CTA */
+.cta {
+  text-align: center;
+}
+.cta p { margin: 0 0 14px; }
+.btn {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--display);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  transition: transform .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+
+footer {
+  margin-top: 36px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+footer p { margin: 0 0 6px; }
+
+a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* Ranked lists inside the "そこが変だよ！" tab */
+.sub {
+  font-family: var(--display);
+  font-size: 18px;
+  margin: 28px 0 12px;
+}
+.ranks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: rank;
+  display: grid;
+  gap: 10px;
+}
+.ranks li {
+  counter-increment: rank;
+  background: #fff;
+  border-radius: 20px;
+  padding: 14px 18px 14px 56px;
+  position: relative;
+  min-width: 0;
+}
+.ranks li::before {
+  content: counter(rank);
+  position: absolute;
+  left: 16px;
+  top: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--butter);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+.ranks strong { display: block; font-size: 15px; margin-bottom: 2px; }
+.ranks span { font-size: 14px; color: var(--ink-soft); overflow-wrap: anywhere; }
+
+
+/* Clickable ranking items */
+.ranks details.rank {
+  background: #fff;
+  border-radius: 20px;
+  min-width: 0;
+  overflow: hidden;
+}
+.ranks summary {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  padding: 14px 52px 14px 58px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+}
+.ranks summary::-webkit-details-marker { display: none; }
+.ranks summary strong { font-size: 15px; line-height: 1.5; }
+.ranks summary::before {
+  content: attr(data-n);
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--butter);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+.ranks summary::after {
+  content: "+";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--ink-soft);
+}
+.ranks details[open] summary::after { content: "–"; }
+.ranks summary:focus-visible { outline: 3px solid var(--ink); outline-offset: -3px; border-radius: 20px; }
+.ranks .rbody {
+  padding: 0 18px 16px 58px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+
+.ranks .rfull {
+  display: block;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+
+/* Data tab */
+.stat-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+  margin: 0 0 6px;
+}
+.stat {
+  background: #fff;
+  border-radius: 22px;
+  padding: 18px 20px;
+  min-width: 0;
+}
+.stat b {
+  display: block;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1.1;
+}
+.stat span { font-size: 14px; color: var(--ink-soft); }
+.bars { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.bars li { display: grid; grid-template-columns: 110px 1fr 44px; gap: 10px; align-items: center; font-size: 14px; }
+.bars .track { background: #fff; border-radius: 999px; height: 14px; overflow: hidden; }
+.bars .fill { display: block; height: 100%; border-radius: 999px; background: var(--peach); }
+.bars .n { font-family: var(--mono); text-align: right; }
+.data-note { font-size: 13px; color: var(--ink-soft); }
+.src-list { margin: 0; padding-left: 1.2em; font-size: 13px; }
+.src-list a { color: var(--ink); overflow-wrap: anywhere; }
+@media (min-width: 620px) { .stat-grid { grid-template-columns: repeat(3, 1fr); } }
+
+
+/* Upcoming schools and trend pills */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 4px;
+  display: grid;
+  gap: 12px;
+}
+.timeline li {
+  background: #fff;
+  border-radius: 22px;
+  padding: 16px 18px;
+  min-width: 0;
+}
+.timeline .when {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--mint);
+  border-radius: 999px;
+  padding: 3px 12px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.timeline strong { display: block; font-size: 16px; }
+.timeline span { font-size: 14px; color: var(--ink-soft); overflow-wrap: anywhere; }
+.trend-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.trend-tags li {
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.trend-tags li:nth-child(5n+1) { background: var(--peach); }
+.trend-tags li:nth-child(5n+2) { background: var(--butter); }
+.trend-tags li:nth-child(5n+3) { background: var(--mint); }
+.trend-tags li:nth-child(5n+4) { background: var(--lilac); }
+.trend-tags li:nth-child(5n+5) { background: var(--sky); }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 6px;
+  padding: 0;
+  list-style: none;
+}
+.tabs button {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+.tabs button:hover { transform: translateY(-2px); }
+.tabs button[aria-selected="true"] {
+  background: var(--ink);
+  color: var(--cream);
+}
+.tabs button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* One orchestrated entrance on load; resting state stays fully visible. */
+@keyframes rise {
+  from { transform: translateY(14px); }
+  to { transform: none; }
+}
+.hero, .card { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
+.card:nth-of-type(2) { animation-delay: .08s; }
+.card:nth-of-type(3) { animation-delay: .16s; }
+.card:nth-of-type(4) { animation-delay: .24s; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+@media (min-width: 620px) {
+  .notes { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="blob a" aria-hidden="true"></div>
+<div class="blob b" aria-hidden="true"></div>
+<div class="blob c" aria-hidden="true"></div>
+
+<main class="wrap">
+
+<header class="hero">
+  <span class="tag">オンライン トークセッション</span> <span class="tag">EDIXで会いましょう</span>
+  <h1><span class="sticker">そこが変だよ！</span><br>インターナショナルスクール<span class="q">？</span></h1>
+  <p class="lede">間違えた子が先生に「いい挑戦だったね」と言われている。黒板には答えではなく、問いだけが書かれている。インターナショナルスクールを訪れると、日本の学校の常識とは少し違う"変な"光景に出会うことがあります。</p>
+</header>
+
+<nav aria-label="セッションの内容">
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-tab="overview">概要</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="speaker">メインスピーカー</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="data">データで見る</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="spotted">そこが変だよ！</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="talk">一緒に考える</button>
+  </div>
+</nav>
+
+<section class="card c-white" data-tab="overview">
+  <span class="k">ABOUT</span>
+  <h2>"変だな"を入口に、日本の学びを見直す</h2>
+  <p>そのとき「なぜ、そうなっているのか」と立ち止まってみると、日本の教育を見直す手がかりが見えてきます。本セッションでは、そうした光景を入口に、「それは日本の教育にとってどんな示唆を持つのか」を一緒に考えます。</p>
+  <p>国や文化の違いを優劣で語るのではなく、教育の前提を問い直す視点を共有することがねらいです。インターナショナルスクールを"正解"として紹介するのではありません。</p>
+</section>
+
+<section class="card c-peach" data-tab="spotted">
+  <span class="k">SPOTTED</span>
+  <h2>こんな"変だな"があります</h2>
+  <ul class="notes">
+    <li><strong>間違いを褒める先生</strong><span>「間違えた子が、先生に『いい挑戦だったね』と言われている」</span></li>
+    <li><strong>正解の板書がない授業</strong><span>「黒板には答えではなく、問いだけが書かれている」</span></li>
+    <li><strong>学校に関わる保護者</strong><span>学校の運営や学びに、保護者が深く関わっている</span></li>
+  </ul>
+
+  <h3 class="sub">インターのここが"変だよ！"</h3>
+  <ol class="ranks">
+    <details class="rank" name="international"><summary data-n="1"><strong>チャイム</strong></summary><div class="rbody"><strong class="rfull">チャイムが鳴らない</strong>児童・生徒が「自分で」教室を移動します。</div></details>
+    <details class="rank" name="international"><summary data-n="2"><strong>うわぐつ</strong></summary><div class="rbody"><strong class="rfull">スリッパ・うわぐつはない</strong>校内で履き替えず、外靴のまま過ごす場面があります。児童・生徒は掃除の時間がない。</div></details>
+    <details class="rank" name="international"><summary data-n="3"><strong>制服</strong></summary><div class="rbody"><strong class="rfull">制服がない、あるいはゆるい</strong>服装の自由が、学ぶ姿勢に影響するかを考えられます。PTAがショップを運営していて、そこで購入できるTシャツやトレーナーを教員も児童・生徒も好んで着ます。</div></details>
+    <details class="rank" name="international"><summary data-n="4"><strong>教室</strong></summary><div class="rbody"><strong class="rfull">先生の机が教室にない</strong>先生は教室の外の共有スペースで、準備や相談をすることがあります。教室の家具やレイアウトが変。</div></details>
+    <details class="rank" name="international"><summary data-n="5"><strong>職員室</strong></summary><div class="rbody"><strong class="rfull">職員室がない</strong>先生だけが集まる部屋ではなく、児童・生徒も出入りする場所で先生が過ごすことがあります。</div></details>
+    <details class="rank" name="international"><summary data-n="6"><strong>犬</strong></summary><div class="rbody"><strong class="rfull">犬</strong>学校に毎日セラピードックがいる。</div></details>
+    <details class="rank" name="international"><summary data-n="7"><strong>時間割</strong></summary><div class="rbody"><strong class="rfull">時間割が一人ひとり違う</strong>選択科目が多く、同じ学年でも同じ授業を受けないことがあります。小学校は45分、中高は80分単位の授業があります。小学部には教科書がない。</div></details>
+    <details class="rank" name="international"><summary data-n="8"><strong>宿題</strong></summary><div class="rbody"><strong class="rfull">宿題より、調べ学習やプロジェクトが多い</strong>提出物より、探究の過程が見られます。小学校はノー・ホームワーク・ポリシーです。</div></details>
+    <details class="rank" name="international"><summary data-n="9"><strong>学年</strong></summary><div class="rbody"><strong class="rfull">学年が年齢だけで決まらない</strong>年齢の違う児童・生徒が同じ授業に入ることがあります。</div></details>
+    <details class="rank" name="international"><summary data-n="10"><strong>夏休み</strong></summary><div class="rbody"><strong class="rfull">夏休みが9週間は長すぎる</strong>日本の学校の夏休みと比べて、長さが大きく違うと感じる場面があります。教員も児童・生徒と同じだけ長期休暇中は休む。</div></details>
+  </ol>
+
+  <h3 class="sub">教員の1日の"変だよ！"</h3>
+  <ol class="ranks">
+    <details class="rank" name="teacher"><summary data-n="1"><strong>就業時間</strong></summary><div class="rbody"><strong class="rfull">授業の準備時間が就業時間に組み込まれている</strong>教員は8:00に出勤し、放課後は16:00にはほぼ教員が学校にいない。</div></details>
+    <details class="rank" name="teacher"><summary data-n="2"><strong>打ち合わせ</strong></summary><div class="rbody"><strong class="rfull">放課後の会議より、一人ずつ・チームでの話し合いが多い</strong>放課後に会議はない。</div></details>
+    <details class="rank" name="teacher"><summary data-n="3"><strong>分担</strong></summary><div class="rbody"><strong class="rfull">担任の仕事を、複数の先生で分担する</strong>一人の担任が全部を抱え込まない仕組みがあります。</div></details>
+    <details class="rank" name="teacher"><summary data-n="4"><strong>保護者との関わり</strong></summary><div class="rbody"><strong class="rfull">保護者との連絡が、面談とメールとチャットで中心に行われる</strong>行事の連絡より、児童・生徒の学びの話が多くなります。保護者がとにかく学校にくる機会が多い。Parentingワークショップもあります。</div></details>
+  <details class="rank" name="teacher"><summary data-n="5"><strong>専門家</strong></summary><div class="rbody"><strong class="rfull">「教えていない」専門家が学校にいっぱいいる</strong>Director of.... Head of... が多すぎる。</div></details>
+  </ol>
+</section>
+
+<section class="card c-sky" data-tab="overview">
+  <span class="k">SCHEDULE</span>
+  <h2>当日の流れ</h2>
+  <ul class="pills">
+    <li><b>前半</b>登壇者による話題提供（30分）</li>
+    <li><b>後半</b>参加者によるディスカッション</li>
+    <li><b>形式</b>オンライン（Zoom）</li>
+    <li><b>日時</b>2026年11月18日（水）20:00〜</li>
+  </ul>
+</section>
+
+<section class="card c-mint" data-tab="speaker">
+  <span class="k">MAIN SPEAKER</span>
+  <img class="speaker-photo" src="data:image/jpeg;base64,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" alt="茂田 可愛" width="132" height="132">
+  <div class="speaker-head">
+    <p class="speaker-name">茂田 可愛</p>
+    <p class="role-pill">カネディアン・アカデミイ 小学部<br>ICTインテグレーションスペシャリスト ・ 神戸市</p>
+  </div>
+  <p>小学部で、学校が保有する1人1台のChromebookとiPadの管理や、三歳から５年生までのテクノロジー＆デザインの授業を担当し、保護者・教職員向けのICT研修に携わっています。日本語を外国語として教えていた経験を活かして、本学の各教員がテクノロジーを「便利なツール」としてただ使えるようになるためにお手伝いするのではなく、「学び方・教え方をエンパワーしてくれるツール」として活用できるように、私自身も日々勉強中です。今一番興味のある分野は、ファブリケーションツールを使ったデジタルものづくりで、デジタルとアナログを行ったり来たりする学びです。また、最近リノベーションした小学部のMakerspaceを「エンゲージメント」の場所としてもっと活用してもらうことです。</p>
+  <ul class="badges">
+    <li>Google Certified Trainer</li>
+    <li>Google Certified Innovator</li>
+    <li>Google Certified Coach</li>
+    <li>Adobe Creative Educator Innovator 2026</li>
+    <li>Friends of Figma Leader</li>
+  </ul>
+  <ul class="speaker-links">
+    <li><a href="https://edudirectory.withgoogle.com/profiles/5071916470108160" target="_blank" rel="noopener">Google for Education 認定プロフィール</a></li>
+    <li><a href="https://adobe-edu.net/ace-innovator/" target="_blank" rel="noopener">Adobe Creative Educator Innovator 2026</a></li>
+    <li><a href="https://friends.figma.com/japan-educator/" target="_blank" rel="noopener">Friends of Figma Leader（Figma Japan Educator）</a></li>
+  </ul>
+</section>
+
+<section class="card c-white" data-tab="speaker">
+  <span class="k">OUR SCHOOL IN NUMBERS</span>
+  <h2>カネディアン・アカデミイの数字</h2>
+  <div class="stat-grid">
+    <div class="stat"><b>約630人</b><span>在校生（資料により620〜650人）</span></div>
+    <div class="stat"><b>40以上</b><span>生徒の国籍（2022–23年度）</span></div>
+    <div class="stat"><b>19</b><span>教員の国籍（2022–23年度）</span></div>
+  </div>
+  <p class="k" style="margin-top:22px">生徒の出身地の割合（資料による、年は不明）</p>
+  <ul class="bars">
+    <li><span>日本</span><span class="track"><span class="fill" style="width:38%"></span></span><span class="n">38%</span></li>
+    <li><span>北米</span><span class="track"><span class="fill" style="width:25%"></span></span><span class="n">25%</span></li>
+    <li><span>ヨーロッパ</span><span class="track"><span class="fill" style="width:11%"></span></span><span class="n">11%</span></li>
+    <li><span>その他</span><span class="track"><span class="fill" style="width:26%"></span></span><span class="n">26%</span></li>
+  </ul>
+  <p class="k" style="margin-top:22px">寄宿舎</p>
+  <p>高校生約40人が寄宿しています。出身は20か国以上です。</p>
+  <p class="data-note">※在校生数は資料によって異なります。教員数は85人以上とされていますが、年は確認できませんでした。発表前に学校に最新の数字を確認してください。</p>
+  <p class="k" style="margin-top:18px">出典</p>
+  <ul class="src-list">
+    <li><a href="https://www.canacad.ac.jp/discovering" target="_blank" rel="noopener">Canadian Academy 公式サイト（Discovering）</a></li>
+    <li><a href="https://istimes.net/en/articles/how-diverse-are-we-at-canadian-academy/" target="_blank" rel="noopener">How diverse are we at Canadian Academy?（ISTimes）</a></li>
+    <li><a href="https://careercross.com/en/company/pdf-413482" target="_blank" rel="noopener">Canadian Academy 会社概要（CareerCross）</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Canadian_Academy" target="_blank" rel="noopener">Canadian Academy（Wikipedia）</a></li>
+  </ul>
+</section>
+
+<section class="card c-lilac" data-tab="speaker">
+  <span class="k">FACTS</span>
+  <h2>学校の基本情報</h2>
+  <dl class="facts">
+    <dt>学校名</dt><dd>カネディアン・アカデミイ</dd>
+    <dt>創立</dt><dd>1913年</dd>
+    <dt>所在地</dt><dd>兵庫県神戸市東灘区向洋町中4-1（六甲アイランド）</dd>
+    <dt>対象</dt><dd>PreK〜Grade 12、寄宿舎あり</dd>
+    <dt>教育</dt><dd>IBワールドスクール</dd>
+    <dt>運営</dt><dd>非営利の学校</dd>
+    <dt>公式サイト</dt><dd><a href="https://www.canacad.ac.jp/" target="_blank" rel="noopener">www.canacad.ac.jp</a></dd>
+    <dt>認定</dt><dd>WASC、Council of International Schools（CIS）、Japan Council of International Schools（JCIS）ほか</dd>
+  </dl>
+</section>
+
+<section class="card c-white" data-tab="data">
+  <span class="k">DATA</span>
+  <h2>インターナショナルスクールってどんなところ？</h2>
+  <p>まずは数字でイメージを持ってください。国内のインターナショナルスクールは、東京に集中しています。</p>
+  <div class="stat-grid">
+    <div class="stat"><b>116校</b><span>国内の掲載校数（データベース。年は不明）</span></div>
+    <div class="stat"><b>約11%</b><span>過去5年の国内在籍者の増加（ISCの推計）</span></div>
+    <div class="stat"><b>63校</b><span>うち東京の校数</span></div>
+  </div>
+  <p class="k" style="margin-top:22px">都市別の校数</p>
+  <ul class="bars">
+    <li><span>東京</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">63</span></li>
+    <li><span>京都・大阪・神戸</span><span class="track"><span class="fill" style="width:37%"></span></span><span class="n">23</span></li>
+    <li><span>名古屋</span><span class="track"><span class="fill" style="width:11%"></span></span><span class="n">7</span></li>
+    <li><span>札幌・北海道</span><span class="track"><span class="fill" style="width:6%"></span></span><span class="n">4</span></li>
+    <li><span>つくば・長野・沖縄・福岡</span><span class="track"><span class="fill" style="width:5%"></span></span><span class="n">3ずつ</span></li>
+    <li><span>仙台・広島</span><span class="track"><span class="fill" style="width:3%"></span></span><span class="n">2ずつ</span></li>
+    <li><span>小田原・網張・甲府</span><span class="track"><span class="fill" style="width:2%"></span></span><span class="n">1ずつ</span></li>
+  </ul>
+  <p class="k" style="margin-top:22px">学校の種類</p>
+  <p>カリキュラムは、IB、アメリカ、イギリスなどさまざまです。国の制度上の「一条校」は、ごく少数です。多くは「各種学校」などの扱いです。寄宿制の学校もあります。</p>
+  <p class="k" style="margin-top:22px">授業料の目安（年額）</p>
+  <p>通学制は150万〜380万円、寄宿制は約600万〜1,000万円です。学校によって大きく異なります。</p>
+  <p class="k" style="margin-top:22px">増えている理由</p>
+  <p>帰国子女や、国際結婚の家庭からの需要が中心です。地方からの移転や、2024年6月の特区制度も背景にあります。</p>
+  <p class="k" style="margin-top:22px">これから開校する学校（告知済み）</p>
+  <ol class="timeline">
+    <li><span class="when">2027年4月</span><strong>神戸：Kansai International Academy 山のキャンパス</strong><span>4年生（約10歳）が対象。PYP（国際バカロレア初等教育）を日英2言語で、自然の中で学びます。</span></li>
+    <li><span class="when">2027年8月</span><strong>札幌市南区：旧常盤小学校の校舎を活用</strong><span>2021年に閉校した小学校の建物を、改修してインターナショナルスクールとして開設します。学校名、学年、定員は未発表です。</span></li>
+    <li><span class="when">2027年秋</span><strong>東京：Epsom College Tokyo</strong><span>3〜11歳が対象の英国式カリキュラムです。最大250人を想定しています。所在地は未発表です。</span></li>
+  </ol>
+  <p class="k" style="margin-top:22px">いま見える傾向</p>
+  <ul class="trend-tags">
+    <li>小学校段階（3〜11歳）</li>
+    <li>東京以外に広がる（神戸・札幌）</li>
+    <li>公立校の校舎を再利用</li>
+    <li>英国系・IB系の新設</li>
+    <li>自然・体験を取り入れた学び</li>
+  </ul>
+  <p class="data-note">※告知内容は、各校の発表と報道に基づきます。開校後は変わる可能性があります。</p>
+  <p class="data-note">※2026年の市場レポートに基づく二次情報です。学校数の年ごとの推移、種類別の校数、全国の在籍者数は、確認できていません。発表前に文部科学省やISCの一次資料で確認してください。</p>
+  <p class="k" style="margin-top:18px">出典</p>
+  <ul class="src-list">
+    <li><a href="https://schools.novaed.cn/news/japan-s-international-schools-in-2026-what-is-driving-growth-and-what-is-undermining-it-2" target="_blank" rel="noopener">Japan's International Schools in 2026: Market Intelligence Briefing（NovaEd Schools）</a></li>
+    <li><a href="https://www.epsomcollege.org.uk/news/epsom-college-to-open-new-tokyo-campus-in-2027/" target="_blank" rel="noopener">Epsom College to Open New Tokyo Campus in 2027（Epsom College）</a></li>
+    <li><a href="https://istimes.net/en/articles/kansai-international-academy-mountain-campus-2027/" target="_blank" rel="noopener">Kansai International Academy Mountain Campus（ISTimes）</a></li>
+    <li><a href="https://www.hokkaido-np.co.jp/article/1174423/" target="_blank" rel="noopener">札幌・南区にインターナショナルスクール（北海道新聞）</a></li>
+  </ul>
+</section>
+
+<section class="card c-butter" data-tab="talk">
+  <span class="k">TALK ABOUT</span>
+  <h2>一緒に考えたいこと</h2>
+  <p>当日は、Zoomのチャットに、ここで考えたいことへの答えや感想を書き込んでください。</p>
+  <ul class="bubbles">
+    <li>あなたの現場で「ここが変だな」と感じるのは、どんな場面ですか。</li>
+    <li>間違いを褒める文化は、児童・生徒の挑戦にどんな影響を与えるでしょうか。</li>
+    <li>学校と家庭の関わり方は、どこまでが理想で、どこから負担になるでしょうか。</li>
+    <li>学習の記録やデータは、児童・生徒の何を見て、何を見落とすのでしょうか。</li>
+  </ul>
+</section>
+
+</main>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('[role="tab"]');
+  var panels = document.querySelectorAll('[data-tab]:not(button)');
+  function show(name) {
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-selected', b.dataset.tab === name ? 'true' : 'false');
+    });
+    panels.forEach(function (p) {
+      p.hidden = p.dataset.tab !== name;
+    });
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.tab); });
+  });
+  show('overview');
+})();
+</script>
+</body>
+</html>
