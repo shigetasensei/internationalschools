@@ -486,6 +486,37 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
 .trend-tags li:nth-child(5n+4) { background: var(--lilac); }
 .trend-tags li:nth-child(5n+5) { background: var(--sky); }
 
+
+/* Photo corner */
+.photo-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.photo-grid li { min-width: 0; }
+.ph {
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  border-radius: 22px;
+  border: 2px dashed var(--ink-soft);
+  background: var(--mint);
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.photo-grid figcaption {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 8px;
+}
+@media (min-width: 560px) { .photo-grid { grid-template-columns: repeat(3, 1fr); } }
+
 /* Tabs */
 .tabs {
   display: flex;
@@ -550,6 +581,7 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
     <button type="button" role="tab" aria-selected="true" data-tab="overview">概要</button>
     <button type="button" role="tab" aria-selected="false" data-tab="speaker">メインスピーカー</button>
     <button type="button" role="tab" aria-selected="false" data-tab="data">データで見る</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="photos">写真で見る</button>
     <button type="button" role="tab" aria-selected="false" data-tab="spotted">そこが変だよ！</button>
     <button type="button" role="tab" aria-selected="false" data-tab="talk">一緒に考える</button>
   </div>
@@ -653,6 +685,18 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
     <li><a href="https://careercross.com/en/company/pdf-413482" target="_blank" rel="noopener">Canadian Academy 会社概要（CareerCross）</a></li>
     <li><a href="https://en.wikipedia.org/wiki/Canadian_Academy" target="_blank" rel="noopener">Canadian Academy（Wikipedia）</a></li>
   </ul>
+</section>
+
+<section class="card c-peach" data-tab="photos">
+  <span class="k">SCHOOL LIFE</span>
+  <h2>学校の様子</h2>
+  <ul class="photo-grid">
+    <li><figure style="margin:0"><div class="ph">写真：Makerspace</div><figcaption>Makerspace（ものづくりの場）</figcaption></figure></li>
+    <li><figure style="margin:0"><div class="ph">写真：授業の様子</div><figcaption>授業の様子</figcaption></figure></li>
+    <li><figure style="margin:0"><div class="ph">写真：学校の風景</div><figcaption>校舎と学校の風景</figcaption></figure></li>
+  </ul>
+  <p><a href="https://photos.google.com/u/0/share/AF1QipOiubl2qXl9GIVK76J7kSF_Vb_lZFIrfzEJfrqnYXgZQb4r1DIL9ohr3WU4AUdCrQ?hl=ja&amp;key=aVdLOGdCRWdhU0l0QkNBd3FBRjJiSnQ3cFgtWkxB" target="_blank" rel="noopener">学校の写真アルバムを見る（Google フォト）</a></p>
+  <p class="data-note">※児童・生徒が写る写真は、学校と保護者の許可を得たものだけを使います。</p>
 </section>
 
 <section class="card c-lilac" data-tab="speaker">
