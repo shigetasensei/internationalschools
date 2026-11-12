@@ -561,6 +561,19 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
 @media (min-width: 620px) {
   .notes { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* Highlighted section titles in the data tab */
+.k.hl {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #ffd6e0;
+  color: #2f2b4f;
+  margin-bottom: 10px;
+}
 </style>
 </head>
 <body>
@@ -746,7 +759,7 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
 </section>
 
 <section class="card c-white" data-tab="data">
-  <span class="k">DATA</span>
+  <span class="k hl">DATA</span>
   <h2>インターナショナルスクールってどんなところ？</h2>
   <blockquote style="margin:14px 0 0;padding:14px 18px;border-left:4px solid var(--accent, #d9a441);background:rgba(0,0,0,.03);border-radius:12px;">
     <p style="margin:0 0 8px;font-weight:700;">文部科学省（学齢児童生徒をいわゆるインターナショナルスクールに通わせた場合の就学義務について）</p>
@@ -770,11 +783,11 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
     <li><span>仙台・広島</span><span class="track"><span class="fill" style="width:3%"></span></span><span class="n">2ずつ</span></li>
     <li><span>小田原・網張・甲府</span><span class="track"><span class="fill" style="width:2%"></span></span><span class="n">1ずつ</span></li>
   </ul>
-  <p class="k" style="margin-top:22px">学校の種類</p>
+  <p class="k hl" style="margin-top:22px">学校の種類</p>
   <p>カリキュラムは、IB、アメリカ、イギリスなどさまざまです。国の制度上の「一条校」は、ごく少数です。多くは「各種学校」などの扱いです。寄宿制の学校もあります。</p>
-  <p class="k" style="margin-top:22px">授業料の目安（年額）</p>
+  <p class="k hl" style="margin-top:22px">授業料の目安（年額）</p>
   <p>通学制は150万〜380万円、寄宿制は約600万〜1,000万円です。学校によって大きく異なります。</p>
-  <p class="k" style="margin-top:22px">増えている理由</p>
+  <p class="k hl" style="margin-top:22px">増えている理由</p>
   <p>帰国子女や、国際結婚の家庭からの需要が中心です。地方からの移転や、2024年6月の特区制度も背景にあります。</p>
   <p class="k" style="margin-top:22px">これから開校する学校（告知済み）</p>
   <ol class="timeline">
@@ -782,7 +795,7 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
     <li><span class="when">2027年8月</span><strong>札幌市南区：旧常盤小学校の校舎を活用</strong><span>2021年に閉校した小学校の建物を、改修してインターナショナルスクールとして開設します。学校名、学年、定員は未発表です。</span></li>
     <li><span class="when">2027年秋</span><strong>東京：Epsom College Tokyo</strong><span>3〜11歳が対象の英国式カリキュラムです。最大250人を想定しています。所在地は未発表です。</span></li>
   </ol>
-  <p class="k" style="margin-top:22px">いま見える傾向</p>
+  <p class="k hl" style="margin-top:22px">いま見える傾向</p>
   <ul class="trend-tags">
     <li>小学校段階（3〜11歳）</li>
     <li>東京以外に広がる（神戸・札幌）</li>
@@ -800,9 +813,9 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
     <li><a href="https://www.hokkaido-np.co.jp/article/1174423/" target="_blank" rel="noopener">札幌・南区にインターナショナルスクール（北海道新聞）</a></li>
   </ul>
 
-  <p class="k" style="margin-top:22px">学費（神戸のインターナショナルスクールの目安）</p>
+  <p class="k hl" style="margin-top:22px">学費（神戸のインターナショナルスクールの目安）</p>
   <p>神戸のインターナショナルスクールの小学1〜5年の年額は、約180万〜240万円とされています（2025–26年度）。</p>
-  <p class="k" style="margin-top:22px">授業時間（小学校・年間）の比較</p>
+  <p class="k hl" style="margin-top:22px">授業時間（小学校・年間）の比較</p>
   <ul class="bars">
     <li><span>カネディアン・アカデミイ</span><span class="track"><span class="fill" style="width:80%"></span></span><span class="n">810時間</span></li>
     <li><span>日本の小学1年</span><span class="track"><span class="fill" style="width:84%"></span></span><span class="n">850時間</span></li>
@@ -811,7 +824,7 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
     <li><span>日本の小学4〜6年</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">1,015時間</span></li>
   </ul>
   <p class="data-note">※カネディアン・アカデミイの小学校は、1日6限×45分×年間180日＝810時間で計算しています（学校からの情報）。日本の数字は学校教育法施行規則（平成29年改訂）の標準授業時数で、1単位時間は45分です。</p>
-  <p class="k" style="margin-top:22px">年間授業日数の比較</p>
+  <p class="k hl" style="margin-top:22px">年間授業日数の比較</p>
   <ul class="bars">
     <li><span>カネディアン・アカデミイ</span><span class="track"><span class="fill" style="width:72%"></span></span><span class="n">180日</span></li>
     <li><span>日本の公立小学校（全国平均）</span><span class="track"><span class="fill" style="width:81%"></span></span><span class="n">約202日</span></li>
