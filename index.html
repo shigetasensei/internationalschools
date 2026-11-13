@@ -18,7 +18,7 @@
   --butter: #fff0a6;
   --sky: #cfe8ff;
   --ink: #2f2b4f;
-  --ink-soft: #5b5778;
+  --ink-soft: #46426a;
   --display: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
   --body: "Noto Sans JP", "Hiragino Sans", sans-serif;
   --mono: "Space Mono", ui-monospace, monospace;
@@ -30,14 +30,14 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: var(--body);
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.85;
   overflow-x: hidden;
 }
 .wrap {
   max-width: 760px;
   margin: 0 auto;
-  padding-block: 28px 64px;
+  padding-block: 28px 130px;
   padding-left: max(18px, env(safe-area-inset-left, 0px));
   padding-right: max(18px, env(safe-area-inset-right, 0px));
   position: relative;
@@ -108,7 +108,7 @@ h1 .q {
 .card h2 {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 22px;
+  font-size: 26px;
   margin: 0 0 12px;
   line-height: 1.4;
 }
@@ -428,9 +428,9 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
   font-size: 40px;
   line-height: 1.1;
 }
-.stat span { font-size: 14px; color: var(--ink-soft); }
+.stat span { font-size: 16px; color: var(--ink-soft); }
 .bars { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
-.bars li { display: grid; grid-template-columns: 130px 1fr auto; gap: 10px; align-items: center; font-size: 14px; }
+.bars li { display: grid; grid-template-columns: 130px 1fr auto; gap: 10px; align-items: center; font-size: 16px; }
 .bars .track { background: #fff; border-radius: 999px; height: 14px; overflow: hidden; }
 .bars .fill { display: block; height: 100%; border-radius: 999px; background: var(--peach); }
 .bars .n { font-family: var(--mono); text-align: right; white-space: nowrap; min-width: 84px; }
@@ -574,6 +574,38 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
   color: #2f2b4f;
   margin-bottom: 10px;
 }
+
+/* 発表操作バー */
+.pres-bar {
+  position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%);
+  z-index: 20; display: flex; align-items: center; gap: 8px;
+  background: #fff; border-radius: 999px; padding: 8px 10px;
+  box-shadow: 0 10px 28px rgba(47,43,79,.2);
+  font-family: var(--display); font-weight: 700; color: var(--ink);
+  max-width: calc(100vw - 24px);
+}
+.pres-bar button {
+  font: inherit; font-size: 16px; border: 0; border-radius: 999px; cursor: pointer;
+  padding: 10px 16px; min-height: 44px; background: var(--peach); color: var(--ink);
+}
+.pres-bar button:hover { filter: brightness(.97); }
+.pres-bar button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+#pos {
+  font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 44vw; padding: 0 6px;
+}
+#presToggle { background: var(--ink); color: #fff; }
+/* 発表モード：ヒーローとタブを隠し、本文を大きく */
+body.present .hero, body.present nav { display: none; }
+body.present .pres-bar { opacity: .4; transition: opacity .2s; }
+body.present .pres-bar:hover, body.present .pres-bar:focus-within { opacity: 1; }
+body.present .wrap { padding-top: 24px; max-width: 920px; }
+body.present .card { margin-top: 0; padding: 36px 40px; }
+body.present .card h2 { font-size: 34px; }
+body.present .card p, body.present .bubbles li { font-size: 22px; }
+body.present .bars li { font-size: 20px; }
+body.present .stat b { font-size: 40px; }
+@media (max-width: 520px) { #pos { max-width: 30vw; font-size: 14px; } }
 </style>
 </head>
 <body>
@@ -846,6 +878,12 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
 </section>
 
 </main>
+<div class="pres-bar" role="group" aria-label="発表の操作">
+  <button type="button" id="prevBtn" aria-label="前のセクション">← 前</button>
+  <span id="pos" aria-live="polite"></span>
+  <button type="button" id="nextBtn" aria-label="次のセクション">次 →</button>
+  <button type="button" id="presToggle" aria-pressed="false">発表モード</button>
+</div>
 <script>
 (function () {
   var buttons = document.querySelectorAll('[role="tab"]');
@@ -861,7 +899,62 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
   buttons.forEach(function (b) {
     b.addEventListener('click', function () { show(b.dataset.tab); });
   });
+  var names = Array.prototype.map.call(buttons, function (b) { return b.dataset.tab; });
+  var posEl = document.getElementById('pos');
+  function current() {
+    var idx = names.indexOf(
+      Array.prototype.find.call(buttons, function (b) { return b.getAttribute('aria-selected') === 'true'; }).dataset.tab
+    );
+    return idx < 0 ? 0 : idx;
+  }
+  function label(i) {
+    return (i + 1) + ' / ' + names.length + '　' + buttons[i].textContent;
+  }
+  function go(i) {
+    if (i < 0 || i >= names.length) return;
+    show(names[i]);
+    posEl.textContent = label(i);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.getElementById('prevBtn').addEventListener('click', function () { go(current() - 1); });
+  document.getElementById('nextBtn').addEventListener('click', function () { go(current() + 1); });
+  buttons.forEach(function (b, i) {
+    b.addEventListener('click', function () { posEl.textContent = label(i); });
+  });
+
+  // 矢印キーでセクションを切り替え（入力欄では無効）
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); go(current() + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current() - 1); }
+  });
+
+  // 発表モード（全画面にもする）
+  var presBtn = document.getElementById('presToggle');
+  function setPresent(on) {
+    document.body.classList.toggle('present', on);
+    presBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    presBtn.textContent = on ? '発表モードを終える' : '発表モード';
+  }
+  presBtn.addEventListener('click', function () {
+    var on = !document.body.classList.contains('present');
+    setPresent(on);
+    try {
+      if (on && document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(function () {});
+      } else if (!on && document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(function () {});
+      }
+    } catch (err) { /* 全画面が使えない環境では発表モードだけ有効 */ }
+  });
+  document.addEventListener('fullscreenchange', function () {
+    if (!document.fullscreenElement && document.body.classList.contains('present')) setPresent(false);
+  });
+
   show('overview');
+  posEl.textContent = label(0);
 })();
 </script>
 </body>
