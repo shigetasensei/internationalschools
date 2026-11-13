@@ -430,10 +430,10 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ink); outline-off
 }
 .stat span { font-size: 14px; color: var(--ink-soft); }
 .bars { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
-.bars li { display: grid; grid-template-columns: 110px 1fr 44px; gap: 10px; align-items: center; font-size: 14px; }
+.bars li { display: grid; grid-template-columns: 130px 1fr auto; gap: 10px; align-items: center; font-size: 14px; }
 .bars .track { background: #fff; border-radius: 999px; height: 14px; overflow: hidden; }
 .bars .fill { display: block; height: 100%; border-radius: 999px; background: var(--peach); }
-.bars .n { font-family: var(--mono); text-align: right; }
+.bars .n { font-family: var(--mono); text-align: right; white-space: nowrap; min-width: 84px; }
 .data-note { font-size: 13px; color: var(--ink-soft); }
 .src-list { margin: 0; padding-left: 1.2em; font-size: 13px; }
 .src-list a { color: var(--ink); overflow-wrap: anywhere; }
